@@ -1,0 +1,70 @@
+{
+  "name": "ui-form-fields",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/ui-form-fields/ui-form-fields/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["scope:shared type:ui"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/shared/ui-form-fields/ui-form-fields/jest.config.cts",
+        "tsConfig": "libs/shared/ui-form-fields/ui-form-fields/tsconfig.spec.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "storybook": {
+      "executor": "@storybook/angular:start-storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "libs/shared/ui-form-fields/ui-form-fields/.storybook",
+        "browserTarget": "ui-form-fields:build-storybook",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@storybook/angular:build-storybook",
+      "outputs": ["{options.outputDir}"],
+      "options": {
+        "outputDir": "dist/storybook/ui-form-fields",
+        "configDir": "libs/shared/ui-form-fields/ui-form-fields/.storybook",
+        "browserTarget": "ui-form-fields:build-storybook",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "test-storybook": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "test-storybook -c libs/shared/ui-form-fields/ui-form-fields/.storybook --url=http://localhost:4400"
+      }
+    },
+    "static-storybook": {
+      "executor": "@nx/web:file-server",
+      "dependsOn": ["build-storybook"],
+      "options": {
+        "buildTarget": "ui-form-fields:build-storybook",
+        "staticFilePath": "dist/storybook/ui-form-fields",
+        "spa": true
+      },
+      "configurations": {
+        "ci": {
+          "buildTarget": "ui-form-fields:build-storybook:ci"
+        }
+      }
+    }
+  }
+}

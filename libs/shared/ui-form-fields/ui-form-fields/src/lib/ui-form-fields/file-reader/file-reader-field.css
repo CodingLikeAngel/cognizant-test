@@ -1,0 +1,58 @@
+.drop-zone {
+  box-sizing: border-box; /* Añadido */
+  border: 2px dashed #ccc;
+  border-radius: 6px;
+  padding: 40px;
+  width: 100%;
+  min-height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+  text-align: center;
+}
+
+
+.drop-zone.drag-over {
+  background-color: rgba(0, 123, 255, 0.1);
+  border-color: #007bff;
+}
+
+.drop-zone.disabled-state {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: auto; /* importante, los hijos deben recibir eventos */
+}
+
+.upload-icon {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.instruction-text {
+  font-size: 16px;
+  color: #555;
+}
+
+.drag-feedback {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.file-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.file-name {
+  font-size: 16px;
+  font-weight: 500;
+}

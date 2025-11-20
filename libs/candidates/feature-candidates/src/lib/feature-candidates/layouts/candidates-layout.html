@@ -1,0 +1,74 @@
+<div class="page-2049">
+  <div class="grid-infinite"></div>
+  <div class="holo-orb orb-1"></div>
+  <div class="holo-orb orb-2"></div>
+  <div class="holo-orb orb-3"></div>
+
+  <header class="header-2049">
+    <div class="header-inner">
+      <mat-icon class="header-icon">hub</mat-icon>
+      <div>
+        <h1 class="header-title">GESTIÓN DE CANDIDATOS</h1>
+        <p class="header-subtitle">PORTAL</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="content-area">
+    <div class="grid-2049">
+
+      <section class="panel-2049">
+        <h2 class="panel-title">NUEVO PERFIL</h2>
+        <div class="form-wrapper">
+          <lib-candidates-form></lib-candidates-form>
+        </div>
+      </section>
+
+      <section class="panel-2049">
+        <h2 class="panel-title">Panel Candidatos</h2>
+
+        <div class="actions-bar">
+          <button
+            mat-raised-button
+            class="delete-all-btn"
+            (click)="clearAllCandidates()"
+            [disabled]="(candidatesService.candidates$ | async)?.length === 0"
+          >
+            <mat-icon>delete_forever</mat-icon>
+            PURGAR TODO
+          </button>
+        </div>
+
+        <div class="filters-header">
+          <h3 class="filters-title">Filtros de búsqueda</h3>
+          <mat-icon class="filters-icon">search</mat-icon>
+        </div>
+
+        <div class="filter-bar" [formGroup]="filterForm">
+          <div class="filter-field">
+            <lib-input-field
+              formControlName="name"
+              label="Nombre"
+              placeholder="Ej: Juan"
+              type="text"
+            ></lib-input-field>
+          </div>
+
+          <div class="filter-field">
+            <lib-input-field
+              formControlName="surname"
+              label="Apellido"
+              placeholder="Ej: Pérez"
+              type="text"
+            ></lib-input-field>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <lib-candidates-table></lib-candidates-table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>

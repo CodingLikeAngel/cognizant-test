@@ -1,0 +1,36 @@
+services:
+  # ---------------------------------
+  # Servicio de API (Backend)
+  # ---------------------------------
+  api:
+    # Ruta al Dockerfile del backend. El contexto de construcción es la raíz.
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    # Mapeo de puertos: Host (3000) -> Contenedor (3000)
+    ports:
+      - "3000:3000"
+    # Variables de entorno para la aplicación Node/NestJS
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+    restart: always
+
+  # ---------------------------------
+  # Servicio de Frontend (Angular/Nginx)
+  # ---------------------------------
+  frontend:
+    # Ruta al Dockerfile del frontend.
+    build:
+      context: .
+      dockerfile: apps/frontend/Dockerfile
+    # Mapeo de puertos: Host (4500) -> Contenedor (80, el puerto de Nginx)
+    ports:
+      - "4500:80"
+    # Configuración esencial para la comunicación. El frontend llama a 'http://api:3000'.
+    environment:
+      API_URL: "http://api:3000"
+    # Asegura que la API se inicie antes que el frontend
+    depends_on:
+      - api
+    restart: always

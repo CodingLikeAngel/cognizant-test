@@ -1,0 +1,50 @@
+<div
+  class="drop-zone"
+  [class.drag-over]="isDragging()"
+  [class.disabled-state]="isDisabled()"
+  (click)="openFileSelection()"
+  (dragover)="onDragOver($event)"
+  (dragenter)="onDragEnter($event)"
+  (dragleave)="onDragLeave()"
+  (drop)="onDrop($event)"
+  [attr.aria-disabled]="isDisabled()"
+  tabindex="0"
+  (keyup.enter)="openFileSelection()"
+  (keyup.space)="openFileSelection()"
+>
+  <input
+    type="file"
+    accept=".xls,.xlsx"
+    #fileInput
+    style="display: none"
+    [disabled]="isDisabled()"
+    (change)="onFileSelected($event)"
+    (blur)="onTouched()"
+  />
+
+  <div class="content">
+    <!-- Sin archivo -->
+    <ng-container *ngIf="!selectedFile()">
+      <mat-icon class="upload-icon" color="primary">cloud_upload</mat-icon>
+      <p class="instruction-text">
+        {{ isDragging() ? '¡Suelta el archivo para cargarlo!' : 'Arrastra un archivo aquí o haz clic para seleccionar' }}
+      </p>
+    </ng-container>
+
+    <!-- Con archivo -->
+    <ng-container *ngIf="selectedFile()">
+      <div class="file-info">
+        <mat-icon color="accent">description</mat-icon>
+        <p class="file-name">{{ selectedFile()?.name }}</p>
+        <button
+          mat-icon-button
+          color="warn"
+          [disabled]="isDisabled()"
+          (click)="$event.stopPropagation(); clearFile()"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</div>

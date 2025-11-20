@@ -1,0 +1,55 @@
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="candidateForm" (ngSubmit)="onSubmit()">
+
+      <!-- Input estrictamente string -->
+      <lib-input-field
+        formControlName="name"
+        label="Nombre"
+        placeholder="Ej: Juan"
+        type="text">
+      </lib-input-field>
+
+      <lib-input-field
+        formControlName="surname"
+        label="Apellido"
+        placeholder="Ej: Pérez"
+        type="text">
+      </lib-input-field>
+
+      <!-- File reader -->
+      <lib-file-reader-field
+        formControlName="resumeFile"
+        label="Archivo Excel (Seniority, Años, Disponibilidad)"
+        (fileError)="showNotification('error', $event)">
+      </lib-file-reader-field>
+
+      <mat-card-actions class="flex justify-end pt-4">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="candidateForm.invalid">
+          Enviar Candidato
+        </button>
+      </mat-card-actions>
+
+    </form>
+  </mat-card-content>
+</mat-card>
+
+
+@if (notification(); as n) {
+  <div class="notification" [class.success]="n.type === 'success'" [class.error]="n.type === 'error'">
+    <div class="notification-icon">
+      <mat-icon>{{ n.type === 'success' ? 'auto_awesome' : 'error_outline' }}</mat-icon>
+    </div>
+    <div class="notification-message">
+      {{ n.message }}
+    </div>
+
+    @if (n.type === 'success') {
+      <div class="notification-lums"></div>
+    }
+  </div>
+}

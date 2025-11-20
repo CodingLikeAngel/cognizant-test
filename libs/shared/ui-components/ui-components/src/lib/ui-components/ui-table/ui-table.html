@@ -1,0 +1,31 @@
+<div class="table-container">
+  
+  @if (data && data.length > 0) {
+    <table>
+      <thead>
+        <tr>
+          @for (col of columns; track col.key) {
+            <th>
+              {{ col.header }}
+            </th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of data; track $index) {
+          <tr>
+            @for (col of columns; track col.key) {
+              <td>
+                {{ row[col.key] }}
+              </td>
+            }
+          </tr>
+        }
+      </tbody>
+    </table>
+  } @else {
+    <div class="no-data">
+      No hay datos para mostrar en esta tabla.
+    </div>
+  }
+</div>

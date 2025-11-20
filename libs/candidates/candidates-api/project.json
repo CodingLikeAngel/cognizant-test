@@ -1,0 +1,21 @@
+{
+  "name": "candidates-api",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/candidates/candidates-api/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["scope:candidates", "type:api"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/candidates/candidates-api/jest.config.cts",
+        "tsConfig": "libs/candidates/candidates-api/tsconfig.spec.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}
