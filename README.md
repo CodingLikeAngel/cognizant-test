@@ -18,7 +18,7 @@ Este proyecto es un Monorepo basado en Nx para la gestión de candidatos, con fr
 Frontend: Angular + Material UI (docs
 )
 
-Backend: Node.js + Express
+Backend: Nest.js y Node.js
 
 Monorepo Tool: Nx (docs
 )
