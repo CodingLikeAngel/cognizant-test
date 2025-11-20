@@ -43,13 +43,6 @@ Nx CLI (opcional, pero recomendado): npm install -g nx
 Docker y Docker Compose
 
 2. Clonar el Repositorio
-echo "# cognizant" >> README.md
-git init
-git add README.md
-git commit -m "primer commit"
-git branch -M main
-git remote add origin https://github.com/CodingLikeAngel/cognizant-test.git
-git push -u origin main
 
 3. Instalar Dependencias
 npm install
