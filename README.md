@@ -63,9 +63,6 @@ Backend (API)
 
 npx nx run api:serve
 
-
-Ideal para desarrollo. Si la API necesita base de datos, asegúrate de levantarla primero con Docker.
-
 Opción 2: Levantar todo con Docker Compose
 docker compose up -d
 
